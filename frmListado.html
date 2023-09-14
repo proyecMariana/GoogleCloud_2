@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <base target="_top">
+  <?!= include('CSS');?>
+</head>
+
+<body>
+  <div class="container-fluid">
+    <?!= include('navbar');?>
+    <div class="row justify-content-center align-items-center minh-100">
+      <div class="bg-light p-4 rounded w-50 col-auto">
+        <div class="row d-flex justify-content-center mb-3">
+          <div class="col-4">
+            <input type="text" class="form-control" id="txt_codigoContacto" placeholder="Código Contacto" aria-label="Código Contacto">
+          </div>
+          <div class="col-3">
+            <button type="button" id="buscarId" class="btn btn-primary" onclick="buscarRegistro()"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+  <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+</svg> Buscar Id Contacto</button>
+          </div>
+          <br>
+        </div>
+      </div>
+    </div>
+    <hr class="my-1">
+    <table id="manteniemientosTable" class="table table-striped">
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>Fecha Registro</th>
+          <th>Nombres</th>
+          <th>Apellidos</th>
+          <th>Nombre Usuario</th>
+          <th>Ciudad</th>
+          <th>Pais</th>
+          <th>Código Zip</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody id="manteniemientosTableBody">
+        <!-- aqui se insertara toda la informacion que la traigamos de los datos de busqueda-->
+      </tbody>
+    </table>
+  </div>
+
+  <template id="manteniemientosRow">
+    <tr>
+      <td class="mantenimientosId" align="center" valign="middle"></td>
+      <td class="mantenimientosFecha"></td>
+      <td class="mantenimientosNombres"></td>
+      <td class="mantenimientosApellidos"></td>
+      <td class="mantenimientosNombreUsuario"></td>
+      <td class="mantenimientosCiudad"></td>
+      <td class="mantenimientosPais"></td>
+      <td class="mantenimientosCodigoZip"></td>
+      <td class="mantenimientosBotones" valign="middle">
+        <a class="final-href" title="Eliminar Contacto"><button type="button" class="btn btn-danger"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
+  <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"/>
+</svg></button></a>
+        <a class="editar" title="Editar Datos Contacto"><button type="button" class="btn btn-info"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-card-checklist" viewBox="0 0 16 16">
+  <path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"/>
+  <path d="M7 5.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0zM7 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm-1.496-.854a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 0 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0z"/>
+</svg></button></a>
+      </td>
+    </tr>
+  </template>
+
+
+  <?!= include('JS');?>
+
+  <script>
+    function buscarRegistro(){
+      
+    const codigoContacto = document.getElementById("txt_codigoContacto").value;
+    google.script.run
+    .withSuccessHandler(info =>{
+        let tableBody = document.getElementById("manteniemientosTableBody");
+        tableBody.innerHTML = "";
+        console.log(info.length);
+        if(info.length > 0){
+        console.log('Entrando:'+info.length);
+          info.forEach( mantenimiento =>{
+            var urlconx='<?= pubUrl ?>';
+            const template = document.getElementById("manteniemientosRow");
+            const templateRow = template.content;
+            let tr = templateRow.cloneNode(true);
+            let colId = tr.querySelector(".mantenimientosId");
+            let colFecha = tr.querySelector(".mantenimientosFecha");
+            let colNombres = tr.querySelector(".mantenimientosNombres");
+            let colApellidos = tr.querySelector(".mantenimientosApellidos");
+            let colNombreUsuario = tr.querySelector(".mantenimientosNombreUsuario");
+            let colCiudad = tr.querySelector(".mantenimientosCiudad");
+            let colPais = tr.querySelector(".mantenimientosPais");
+            let colCodigoZip = tr.querySelector(".mantenimientosCodigoZip");            
+            let coladfinal = tr.querySelector(".final-href");
+            let colEdit = tr.querySelector(".editar");
+
+            colId.innerHTML  = '<h3>'+mantenimiento[0]+'</h3>';
+            colFecha.textContent = mantenimiento[1];
+            colNombres.textContent = mantenimiento[2];
+            colApellidos.textContent = mantenimiento[3];
+            colNombreUsuario.textContent = mantenimiento[4];
+            colCiudad.textContent = mantenimiento[5];
+            colPais.textContent = mantenimiento[6];
+            colCodigoZip.textContent = mantenimiento[7];            
+            if(mantenimiento[0] != '') {
+              coladfinal.href = urlconx+"?p=7&id="+mantenimiento[0];
+              colEdit.href = urlconx+"?p=8&id="+mantenimiento[0];
+
+            }
+            else { 
+              swal('Error en documento','No existe registro de contacto para el codigo No. '+codigoContacto,'error');
+                          }
+ 
+            tableBody.appendChild(tr);
+          })
+        }else {
+          swal('Error','No se encontro coincidencia con el codigo de registro de contacto No. '+codigoContacto,'error');
+        }
+    })
+    .buscarContacto(codigoContacto.toString().toLocaleUpperCase());
+   
+  }//Fin buscar registro
+
+//Evento que se activa cuando se entra a la consulta de registros ingresados por formulario archivo frmListado
+// Si no se a enviado datos de consulta, se muestra toda la informacion ingresada.
+
+/*
+Para validar en JavaScript si una variable es nula o está vacía, puedes utilizar la función if en 
+combinación con el operador de negación (!) y la función Boolean(). La función Boolean() convierte 
+cualquier valor en un valor booleano (verdadero o falso), por lo que puedes utilizarla para evaluar
+si una variable tiene algún valor o no.
+*/
+  window.addEventListener('load', function() {
+  var formulario = document.getElementById('buscarId');
+  //Haciendo que se envie una peticion automatica de busqueda de id
+  formulario.onclick();
+  // Etiquetas para presentar estados de la accion realizada
+  var msg='<?= msg ?>';
+  var msg2='<?= msg2 ?>';
+  if (!Boolean(msg)) {
+    //console.log("La variable es nula o está vacía");
+} else {
+  
+    swal('Se informa','Que se elimino registro con ID: '+msg,'info');
+}
+  if (!Boolean(msg2)) {
+    //console.log("La variable es nula o está vacía");
+} else {
+  
+    swal('Se informa','Que se modifico registro con ID: '+msg2,'info');
+}
+
+});
+
+
+  </script>
+</body>
+
+</html>

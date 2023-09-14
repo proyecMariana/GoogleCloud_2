@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <base target="_top">
+  <?!= include('CSS');?>
+</head>
+
+<body>
+  <div class="container-fluid">
+    <?!= include('navbar_2');?>
+    <br><br>
+    <div class="row justify-content-center align-items-center minh-100">
+      <div class="bg-light p-4 rounded w-50 col-auto">
+        <h3>Registro # <?= frmContacto[0] ?></h3>
+        <form id="formularioRegistro" name="formularioRegistro" class="row g-3 needs-validation" method="GET"
+          action="<?= pubUrl ?>">
+          <div class="col-md-4">
+            <input type="text" name="id" class="form-control" value="<?= frmContacto[0] ?>" hidden>
+            <input type="text" name="p" class="form-control" value="9" hidden>
+            <label for="validationCustom01" class="form-label">Nombres</label>
+            <input type="text" name="nombres" class="form-control" value="<?= frmContacto[2]?>" required>
+
+            <div class="valid-feedback">
+              Ingrese los nombres
+            </div>
+          </div>
+          <div class="col-md-4">
+            <label for="validationCustom02" class="form-label">Apellidos</label>
+            <input type="text" name="apellidos" class="form-control" value="<?= frmContacto[3] ?>" required>
+            <div class="valid-feedback">
+              Ingrese los Apellidos
+            </div>
+          </div>
+          <div class="col-md-4">
+            <label for="validationCustomUsername" class="form-label">Nombre de Usuario</label>
+            <div class="input-group has-validation">
+              <span class="input-group-text" id="inputGroupPrepend">@</span>
+              <input type="text" name="nombreUsuario" class="form-control" value="<?= frmContacto[4] ?>" aria-describedby="inputGroupPrepend" required>
+              <div class="invalid-feedback">
+                Ingrese Nombre de usuario
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <label for="validationCustom03" class="form-label">Ciudad</label>
+            <input type="text" name="ciudad" class="form-control" value="<?= frmContacto[5] ?>" required>
+            <div class="invalid-feedback">
+              Ingrese la Ciudad
+            </div>
+          </div>
+          <div class="col-md-3">
+            <label for="validationCustom04" class="form-label">Pais</label>
+            <select name="pais" class="form-select" required>
+      <option selected><?= frmContacto[6] ?></option>
+      <option value="Colombia">Colombia</option>
+      <option value="Venezuela">Venezuela</option> 
+      <option value="Ecuador">Ecuador</option>     
+    </select>
+            <div class="invalid-feedback">
+              Seleccione el Pais
+            </div>
+          </div>
+          <div class="col-md-3">
+            <label for="validationCustom05" class="form-label">Zip</label>
+            <input type="text" name="codigoZip" class="form-control" value="<?= frmContacto[7] ?>" required>
+            <div class="invalid-feedback">
+              Ingrese el codigo Zip.
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
+              <label class="form-check-label" for="invalidCheck">
+        Acepta terminos y condiciones
+      </label>
+              <div class="invalid-feedback">
+                Debe registrar toda la información antes de hacer clic en el boton Guardar Datos
+              </div>
+            </div>
+          </div>
+          <div class="col-12">
+            <button class="btn btn-primary" type="submit">Guardar Datos</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+(function () {
+  'use strict'
+
+  // Fetch all the forms we want to apply custom Bootstrap validation styles to
+  var forms = document.querySelectorAll('.needs-validation')
+
+  // Loop over them and prevent submission
+  Array.prototype.slice.call(forms)
+    .forEach(function (form) {
+      form.addEventListener('submit', function (event) {
+        if (!form.checkValidity()) {
+          event.preventDefault()
+          event.stopPropagation()
+        }
+
+        form.classList.add('was-validated')
+      }, false)
+    })
+})()
+  </script>
+
+
+  <?!= include('JS');?>
+</body>
+
+</html>
