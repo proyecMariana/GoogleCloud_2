@@ -1,0 +1,60 @@
+//Funcion aprendizaje JavaScript
+
+function menejoswitch() {
+  var dato = 'basd';
+
+  switch (dato) {
+    case "basdf":
+      email = "email1@hotmail.com";
+      console.log('Entro por aqui');
+      //Lanzando la pagina de nombre learning_2 para ser actualizada por navegador
+      var template = HtmlService.createTemplateFromFile("learning_2");
+      var output = template.evaluate();
+      break;
+    case "dfdsa":
+      email = "email2@hotmail.com";
+      break;
+    default:
+      var resultado = 2 + 3;
+      console.log("resultado de sumar:" + resultado);
+      var hoy = new Date();
+      var nacimiento = new Date('1989, 8, 5');
+
+      var dias = ((((hoy - nacimiento) / 1000) / 60) / 60) / 24;
+      var meses = parseInt((dias % 365) / 30);
+      var anios = parseInt(dias / 365);
+      dias = parseInt((dias % 365) % 30);
+
+      console.log('Fecha hoy:' + hoy + " Dias:" + dias);
+      //---------------------------------------------------------------------
+      //Usando un ciclo if si dias es igual a 25 se generan las tablas de multiplicar
+      var j = 2;
+      if (dias == 25) {
+        for (i = 1; i <= 10; i++) {
+          console.log(j + "x " + i + "= " + j * i);
+        }
+      }
+      //---------------------------------------------------------------------
+      //Manejando concatenación de cadenas de texto
+      var texto = "Hola ";
+      texto += 'tu';
+      console.log("Valor de la variable text: " + texto);
+      //---------------------------------------------------------------------
+      //ifs anidados
+      var cajon = Math.floor(Math.random() * 4);
+      if (cajon == 1) {
+        console.log(cajon+':Contiene varias herramientas de dibujo: papel, lápices, etc. ');
+      } else if (cajon == 2) {
+        console.log(cajon+':Contenido hardware: cables, componentes, etc. ');
+      } else if (cajon == 3) {
+        console.log(cajon+':¿Ah, el cajón está cerrado malo?');
+      } else if (cajon == 4) {
+        console.log('Contiene la ropa: camisas, pantalones, etc. ');
+      }
+      else {
+        console.log(cajon+":La noticia del día: el gabinete contiene sólo cuatro cajones y hasta que se demuestre lo contrario, los cajones negativos no existen ");
+      }
+      //---------------------------------------------------------------------
+      break;
+  }
+}
